@@ -19,6 +19,7 @@
 		7E970BDA18DBC08500517A1F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E970BC218DBC08500517A1F /* UIKit.framework */; };
 		7E970BE218DBC08500517A1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E970BE018DBC08500517A1F /* InfoPlist.strings */; };
 		7E970BE418DBC08500517A1F /* YelpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E970BE318DBC08500517A1F /* YelpTests.m */; };
+		7E970BEE18DBC0F300517A1F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 7E970BED18DBC0F300517A1F /* Podfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		7E970BDF18DBC08500517A1F /* YelpTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YelpTests-Info.plist"; sourceTree = "<group>"; };
 		7E970BE118DBC08500517A1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E970BE318DBC08500517A1F /* YelpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YelpTests.m; sourceTree = "<group>"; };
+		7E970BED18DBC0F300517A1F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		7E970BB218DBC08500517A1F = {
 			isa = PBXGroup;
 			children = (
+				7E970BED18DBC0F300517A1F /* Podfile */,
 				7E970BC418DBC08500517A1F /* Yelp */,
 				7E970BDD18DBC08500517A1F /* YelpTests */,
 				7E970BBD18DBC08500517A1F /* Frameworks */,
@@ -220,6 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E970BEE18DBC0F300517A1F /* Podfile in Resources */,
 				7E970BC918DBC08500517A1F /* InfoPlist.strings in Resources */,
 				7E970BD118DBC08500517A1F /* Images.xcassets in Resources */,
 			);
