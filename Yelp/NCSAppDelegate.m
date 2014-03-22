@@ -7,6 +7,7 @@
 //
 
 #import "NCSAppDelegate.h"
+#import "NCSRestaurantsViewController.h"
 
 @implementation NCSAppDelegate
 
@@ -16,6 +17,13 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    NCSRestaurantsViewController *restaurantsViewController = [[NCSRestaurantsViewController alloc] init];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:restaurantsViewController];
+    
+    self.window.rootViewController = navigationController;
+    
     return YES;
 }
 

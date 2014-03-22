@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RestaurantCell" rowHeight="105" id="KGk-i7-Jjw" customClass="NCSRestaurantCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="215" translatesAutoresizingMaskIntoConstraints="NO" id="NwX-ZM-85X">
+                        <rect key="frame" x="93" y="10" width="215" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="215" id="6uR-ho-G0g"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vFW-kk-r4U">
+                        <rect key="frame" x="10" y="10" width="75" height="75"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="75" id="827-A1-Tel"/>
+                            <constraint firstAttribute="height" constant="75" id="dMs-QR-ccO"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zql-1X-v0f">
+                        <rect key="frame" x="93" y="36" width="83" height="15"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="H0H-ju-fZU"/>
+                            <constraint firstAttribute="width" constant="83" id="VCI-ns-XCl"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="83" id="gBm-Vn-JJF"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20033 Reviews" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="116" translatesAutoresizingMaskIntoConstraints="NO" id="Zx3-wF-5SK">
+                        <rect key="frame" x="183" y="35" width="116" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="116" id="47F-7h-og5"/>
+                            <constraint firstAttribute="height" constant="21" id="Zdw-aw-kac"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thai, American, Spanish" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="206" translatesAutoresizingMaskIntoConstraints="NO" id="aqL-3b-bll">
+                        <rect key="frame" x="93" y="75" width="206" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="206" id="3Su-Ib-g1c"/>
+                            <constraint firstAttribute="height" constant="21" id="keq-jn-Ouu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88 Division St, Mission Bay" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="206" translatesAutoresizingMaskIntoConstraints="NO" id="Lbu-vj-0sR">
+                        <rect key="frame" x="93" y="56" width="206" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="206" id="HNU-gQ-AEb"/>
+                            <constraint firstAttribute="height" constant="21" id="W2T-Ay-Vcj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vFW-kk-r4U" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="2iN-dT-nP9"/>
+                    <constraint firstItem="aqL-3b-bll" firstAttribute="top" secondItem="Zx3-wF-5SK" secondAttribute="bottom" constant="19" id="4ps-rs-nIU"/>
+                    <constraint firstItem="Zx3-wF-5SK" firstAttribute="top" secondItem="NwX-ZM-85X" secondAttribute="bottom" constant="4" id="B2v-TW-dmG"/>
+                    <constraint firstItem="Lbu-vj-0sR" firstAttribute="leading" secondItem="vFW-kk-r4U" secondAttribute="trailing" constant="8" id="Beg-3p-2Sv"/>
+                    <constraint firstItem="zql-1X-v0f" firstAttribute="top" secondItem="NwX-ZM-85X" secondAttribute="bottom" constant="5" id="Egt-yw-FPh"/>
+                    <constraint firstItem="zql-1X-v0f" firstAttribute="top" secondItem="NwX-ZM-85X" secondAttribute="bottom" constant="5" id="HdG-fr-dMF"/>
+                    <constraint firstItem="aqL-3b-bll" firstAttribute="leading" secondItem="vFW-kk-r4U" secondAttribute="trailing" constant="8" id="UrJ-ab-V1l"/>
+                    <constraint firstItem="Zx3-wF-5SK" firstAttribute="leading" secondItem="zql-1X-v0f" secondAttribute="trailing" constant="7" id="WOG-7P-Amf"/>
+                    <constraint firstItem="zql-1X-v0f" firstAttribute="leading" secondItem="vFW-kk-r4U" secondAttribute="trailing" constant="8" id="WkV-ld-6cI"/>
+                    <constraint firstItem="zql-1X-v0f" firstAttribute="leading" secondItem="vFW-kk-r4U" secondAttribute="trailing" constant="8" id="a3X-Nq-8zQ"/>
+                    <constraint firstItem="Lbu-vj-0sR" firstAttribute="top" secondItem="Zx3-wF-5SK" secondAttribute="bottom" id="fli-yO-zPe"/>
+                    <constraint firstItem="NwX-ZM-85X" firstAttribute="leading" secondItem="vFW-kk-r4U" secondAttribute="trailing" constant="8" id="mjJ-K8-41y"/>
+                    <constraint firstItem="vFW-kk-r4U" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="pet-Ps-8sG"/>
+                    <constraint firstItem="NwX-ZM-85X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="syZ-Hr-lgc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="address" destination="Lbu-vj-0sR" id="ZzY-6M-9OQ"/>
+                <outlet property="categories" destination="aqL-3b-bll" id="xrn-kC-DtS"/>
+                <outlet property="image" destination="vFW-kk-r4U" id="C9H-sf-GJN"/>
+                <outlet property="name" destination="NwX-ZM-85X" id="572-Ta-sJe"/>
+                <outlet property="rating" destination="zql-1X-v0f" id="okD-fS-vY6"/>
+                <outlet property="reviews" destination="Zx3-wF-5SK" id="Lxb-wH-Foo"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
