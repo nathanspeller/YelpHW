@@ -21,7 +21,6 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NCSYelpClient *client;
 @property (nonatomic, strong) NSMutableArray *restaurants;
-@property (nonatomic, strong) NCSRestaurantCell *prototypeCell;
 @end
 
 @implementation NCSRestaurantsViewController
@@ -37,21 +36,43 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"error: %@", [error description]);
         }];
-        self.prototypeCell = [[NCSRestaurantCell alloc] init];
     }
+    
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
+    searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    UIView *searchBarView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 310.0, 44.0)];
+    searchBarView.autoresizingMask = 0;
+    searchBar.delegate = self;
+    searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
+    [searchBarView addSubview:searchBar];
+    self.navigationItem.titleView = searchBarView;
+    
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
     // Do any additional setup after loading the view from its nib.
     self.title = @"Yelp";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.restaurants = [[NSMutableArray alloc] init];
     
-    [self.client searchWithTerm:@"Thai" success:^(AFHTTPRequestOperation *operation, id response) {
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.000];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.76 green:0.07 blue:0.0 alpha:1.0];
+
+    
+    [self fetchQuery:@"Thai"];
+    
+    UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Filters" style:UIBarButtonItemStylePlain target:self action:@selector(onFilters:)];
+    self.navigationItem.leftBarButtonItem = filterButton;
+}
+
+- (void)fetchQuery:(NSString *)query {
+    [self.client searchWithTerm:query success:^(AFHTTPRequestOperation *operation, id response) {
         NSDictionary *dataDictionary = (NSDictionary *)response;
         NSArray *businessesArray = [dataDictionary objectForKey:@"businesses"];
         [self.restaurants removeAllObjects];
@@ -64,9 +85,6 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error: %@", [error description]);
     }];
-    
-    UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Filters" style:UIBarButtonItemStylePlain target:self action:@selector(onFilters:)];
-    self.navigationItem.leftBarButtonItem = filterButton;
 }
 
 - (IBAction)onFilters:(id)sender{
@@ -110,7 +128,28 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [self.prototypeCell heightForRestaurant:[self.restaurants objectAtIndex:indexPath.row]];
+    return [NCSRestaurantCell heightForRestaurant:[self.restaurants objectAtIndex:indexPath.row]];
+}
+
+#pragma mark - Search methods
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self handleSearch:searchBar];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [self handleSearch:searchBar];
+}
+
+- (void)handleSearch:(UISearchBar *)searchBar {
+    [self fetchQuery:searchBar.text];
+    [self.tableView reloadData];
+    [searchBar resignFirstResponder]; // for hiding the keyboard
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
+    NSLog(@"User canceled search");
+    [searchBar resignFirstResponder]; // for hiding the keyboard
 }
 
 @end

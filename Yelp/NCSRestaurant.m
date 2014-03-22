@@ -12,7 +12,8 @@
 
 - (NCSRestaurant *)initWithDictionary:(NSDictionary *)mDictionary{
     self.name = mDictionary[@"name"];
-    self.address = mDictionary[@"location"][@"cross_streets"];
+    NSArray *locations = mDictionary[@"location"][@"address"];
+    self.address = locations.count ? locations[0] : @"no address";
     self.reviews = mDictionary[@"review_count"];
     self.categories = [[NSMutableArray alloc] init];
     self.imageURL  = [NSURL URLWithString:mDictionary[@"image_url"]];

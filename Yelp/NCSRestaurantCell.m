@@ -21,7 +21,7 @@
 
 @implementation NCSRestaurantCell
 
-- (CGFloat)heightForRestaurant:(NCSRestaurant *)restaurant{
++ (CGFloat)heightForRestaurant:(NCSRestaurant *)restaurant{
     //get attributes of name UILabel
     CGFloat nameWidth = 215;
     NSString *nameFont = @".HelveticaNeueInterface-MediumP4";
@@ -60,10 +60,6 @@
     self.reviews.text = [NSString stringWithFormat:@"%@ reviews", self.restaurant.reviews];
     [self.image setImageWithURL:self.restaurant.imageURL];
     [self.rating setImageWithURL:self.restaurant.ratingImageURL];
-//    self.synopsisLabel.text = self.movie.cast;
-//    self.ratingLabel.text = [NSString stringWithFormat:@"%d%%", self.movie.criticScore];
-//    
-//    [self.posterView setImageWithURL:[NSURL URLWithString:self.movie.imageOriginalLink]];
 }
 
 @end

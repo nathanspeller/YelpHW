@@ -13,5 +13,5 @@
 
 - (void)setRestaurant:(NCSRestaurant *)restaurant;
 
-- (CGFloat)heightForRestaurant:(NCSRestaurant *)restaurant;
++ (CGFloat)heightForRestaurant:(NCSRestaurant *)restaurant;
 @end
