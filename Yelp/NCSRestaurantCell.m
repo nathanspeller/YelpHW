@@ -10,17 +10,35 @@
 #import <UIImageView+AFNetworking.h>
 
 @interface NCSRestaurantCell ()
+@property (nonatomic, strong) NCSRestaurant *restaurant;
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UIImageView *rating;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *reviews;
-@property (weak, nonatomic) IBOutlet UILabel *distance;
-@property (weak, nonatomic) IBOutlet UILabel *price;
 @property (weak, nonatomic) IBOutlet UILabel *address;
 @property (weak, nonatomic) IBOutlet UILabel *categories;
 @end
 
 @implementation NCSRestaurantCell
+
+- (CGFloat)heightForRestaurant:(NCSRestaurant *)restaurant{
+    //get attributes of name UILabel
+    CGFloat nameWidth = 215;
+    NSString *nameFont = @".HelveticaNeueInterface-MediumP4";
+    CGFloat nameFontSize = 17;
+    
+    CGSize constrainedSize = CGSizeMake( nameWidth, 9999);
+    
+    NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [UIFont fontWithName:nameFont size:nameFontSize], NSFontAttributeName,
+                                          nil];
+    
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:restaurant.name attributes:attributesDictionary];
+    
+    CGRect requiredHeight = [string boundingRectWithSize:constrainedSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    
+    return 80+requiredHeight.size.height;
+}
 
 - (void)awakeFromNib
 {

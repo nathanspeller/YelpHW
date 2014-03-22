@@ -21,6 +21,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NCSYelpClient *client;
 @property (nonatomic, strong) NSMutableArray *restaurants;
+@property (nonatomic, strong) NCSRestaurantCell *prototypeCell;
 @end
 
 @implementation NCSRestaurantsViewController
@@ -36,6 +37,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"error: %@", [error description]);
         }];
+        self.prototypeCell = [[NCSRestaurantCell alloc] init];
     }
     return self;
 }
@@ -108,7 +110,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    return [self.prototypeCell heightForRestaurant:[self.restaurants objectAtIndex:indexPath.row]];
 }
 
 @end
