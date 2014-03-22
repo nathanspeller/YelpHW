@@ -8,6 +8,7 @@
 
 #import "NCSRestaurantCell.h"
 #import <UIImageView+AFNetworking.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface NCSRestaurantCell ()
 @property (nonatomic, strong) NCSRestaurant *restaurant;
@@ -59,6 +60,8 @@
     self.categories.text = self.restaurant.categoriesList;
     self.reviews.text = [NSString stringWithFormat:@"%@ reviews", self.restaurant.reviews];
     [self.image setImageWithURL:self.restaurant.imageURL];
+    self.image.layer.masksToBounds = YES;
+    self.image.layer.cornerRadius = 5.0f;
     [self.rating setImageWithURL:self.restaurant.ratingImageURL];
 }
 

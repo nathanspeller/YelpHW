@@ -148,7 +148,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
-    NSLog(@"User canceled search");
+    NSLog(@"User cancelled search");
     [searchBar resignFirstResponder]; // for hiding the keyboard
 }
 
