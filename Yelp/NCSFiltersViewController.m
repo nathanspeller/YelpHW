@@ -82,7 +82,14 @@
         }
     } else if ([category[@"type"] isEqualToString:@"segmented"]) {
         return 1;
-    } 
+    } else if ([category[@"type"] isEqualToString:@"expandable"]) {
+        if ([self.isExpanded[category[@"name"]] isEqualToValue:@YES]) {
+            return catArray.count;
+        } else {
+            return 4;
+        }
+
+    }
     return catArray.count;
 }
 
@@ -99,10 +106,14 @@
         NSLog(@"%@", self.isExpanded);
         NSLog(@"%@", self.options);
     } else if ([category[@"type"] isEqualToString:@"expandable"]) {
-        if([self.options[category[@"list"][indexPath.row]]  isEqual: @YES]){
-            [self.options removeObjectForKey:category[@"list"][indexPath.row]];
+        if(![self.isExpanded[category[@"name"]] isEqualToValue: @YES] && indexPath.row == 3){
+            self.isExpanded[category[@"name"]] = @YES;
         } else {
-            self.options[category[@"list"][indexPath.row]] = @YES;
+            if([self.options[category[@"list"][indexPath.row]]  isEqual: @YES]){
+                [self.options removeObjectForKey:category[@"list"][indexPath.row]];
+            } else {
+                self.options[category[@"list"][indexPath.row]] = @YES;
+            }
         }
     }
     
@@ -127,7 +138,9 @@
         [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         cell.accessoryView = switchView;
     } else if ([category[@"type"] isEqualToString:@"expandable"]){
-        if([self.options[category[@"list"][indexPath.row]]  isEqual: @YES]){
+        if (![self.isExpanded[category[@"name"]] isEqualToValue:@YES] && indexPath.row == 3) {
+            cell.textLabel.text = @"See All";
+        } else if([self.options[category[@"list"][indexPath.row]]  isEqual: @YES]){
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }
