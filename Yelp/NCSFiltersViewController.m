@@ -37,23 +37,18 @@
     
     self.categories = [NSMutableArray arrayWithObjects:
       @{
-        @"name":@"Price",
-        @"type":@"segmented",
-        @"list":@[@"$",@"$$",@"$$$",@"$$$$"]
-        },
-      @{
         @"name":@"Most Popular",
         @"type":@"switches",
         @"list":@[@"Open Now",@"Hot & New",@"Offering a Deal",@"Delivery"]
         },
       @{
         @"name":@"Distance",
-        @"type":@"expandable",
+        @"type":@"dropdown",
         @"list":@[@"Auto",@"2 blocks",@"6 blocks",@"1 mile",@"5 miles"]
         },
       @{
         @"name":@"Sort By",
-        @"type":@"expandable",
+        @"type":@"dropdown",
         @"list":@[@"Best Match",@"Distance",@"Rating",@"Most Reviewed"]
         },
       @{
@@ -79,8 +74,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSDictionary *category = self.categories[section];
     NSArray *catArray = category[@"list"];
-    if ([category[@"type"] isEqualToString:@"expandable"]) {
-        if ([category[@"type"] isEqualToString:@"expandable"]) {
+    if ([category[@"type"] isEqualToString:@"dropdown"]) {
+        if ([category[@"type"] isEqualToString:@"dropdown"]) {
             if ([self.isExpanded[category[@"name"]] isEqualToValue:@NO]) {
                 return catArray.count;
             } else {
@@ -89,14 +84,14 @@
         }
     } else if ([category[@"type"] isEqualToString:@"segmented"]) {
         return 1;
-    }
+    } 
     return catArray.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *category = self.categories[indexPath.section];
-    if ([category[@"type"] isEqualToString:@"expandable"]) {
+    if ([category[@"type"] isEqualToString:@"dropdown"]) {
         if ([self.isExpanded[category[@"name"]] isEqualToValue:@NO]) {
             self.isExpanded[category[@"name"]] = @YES;
             self.options[category[@"name"]] = category[@"list"][indexPath.row];
@@ -105,6 +100,12 @@
         }
         NSLog(@"%@", self.isExpanded);
         NSLog(@"%@", self.options);
+    } else if ([category[@"type"] isEqualToString:@"expandable"]) {
+        if([self.options[category[@"list"][indexPath.row]]  isEqual: @YES]){
+            [self.options removeObjectForKey:category[@"list"][indexPath.row]];
+        } else {
+            self.options[category[@"list"][indexPath.row]] = @YES;
+        }
     }
     
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
@@ -117,14 +118,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *category = self.categories[indexPath.section];
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    if ([category[@"type"] isEqualToString:@"expandable"]) {
+    cell.textLabel.text = category[@"list"][indexPath.row];
+    if ([category[@"type"] isEqualToString:@"dropdown"]) {
         if ((indexPath.row == 0) && ([[self.isExpanded objectForKey:category[@"name"]]  isEqual: @YES]) && ([self.options objectForKey:category[@"name"]])) {
             cell.textLabel.text = [self.options objectForKey:category[@"name"]];
-        } else {
-            cell.textLabel.text = category[@"list"][indexPath.row];
+        }
+    } else if ([category[@"type"] isEqualToString:@"switches"]) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
+        cell.accessoryView = switchView;
+    } else if ([category[@"type"] isEqualToString:@"expandable"]){
+        if([self.options[category[@"list"][indexPath.row]]  isEqual: @YES]){
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }
     return cell;
+}
+
+- (IBAction)togglePrice:(id)sender{
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

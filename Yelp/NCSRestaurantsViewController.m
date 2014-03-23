@@ -22,6 +22,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 @property (nonatomic, strong) NCSYelpClient *client;
 @property (nonatomic, strong) NSMutableArray *restaurants;
 @property (nonatomic, strong) NSString *query;
+@property (nonatomic, strong) NSDictionary *options;
 @end
 
 @implementation NCSRestaurantsViewController
@@ -70,7 +71,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 - (void)fetchQuery {
     [self.client searchWithTerm:self.query success:^(AFHTTPRequestOperation *operation, id response) {
         NSDictionary *dataDictionary = (NSDictionary *)response;
-        NSLog(@"%@", response);
+//        NSLog(@"%@", response);
         NSArray *businessesArray = [dataDictionary objectForKey:@"businesses"];
         [self.restaurants removeAllObjects];
         for (NSDictionary *mDictionary in businessesArray) {
@@ -152,7 +153,9 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 
 - (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSDictionary *)options
 {
+    self.options = options;
     [self fetchQuery];
+    NSLog(@"Searching '%@' with options %@",self.query, options);
     [self.tableView reloadData];
 }
 
