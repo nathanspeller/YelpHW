@@ -8,17 +8,18 @@
 
 #import "NCSFiltersViewController.h"
 
-enum FilterCategoryListTypes {
-    kTypeSegmented,
-    kTypeSwitches,
-    kTypeExpandable
-};
-
-typedef enum FilterCategoryListTypes FilterCategoryListTypes;
+//enum FilterCategoryListTypes {
+//    kTypeSegmented,
+//    kTypeSwitches,
+//    kTypeExpandable
+//};
+//
+//typedef enum FilterCategoryListTypes FilterCategoryListTypes;
 
 @interface NCSFiltersViewController ()
 @property (nonatomic, strong) NSMutableArray *categories;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableDictionary *isExpanded;
 @end
 
 @implementation NCSFiltersViewController
@@ -38,6 +39,7 @@ typedef enum FilterCategoryListTypes FilterCategoryListTypes;
     self.title = @"Filters";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.isExpanded = [[NSMutableDictionary alloc] initWithCapacity:4];
     
     self.categories = [NSMutableArray arrayWithObjects:
       @{
@@ -86,12 +88,34 @@ typedef enum FilterCategoryListTypes FilterCategoryListTypes;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *catArray = self.categories[section][@"list"];
+    NSDictionary *category = self.categories[section];
+    NSArray *catArray = category[@"list"];
+    if ([category[@"type"] isEqualToString:@"expandable"]) {
+        if ([category[@"type"] isEqualToString:@"expandable"]) {
+            if ([self.isExpanded[category[@"name"]] isEqualToValue:@NO]) {
+                return catArray.count;
+            } else {
+                return 1;
+            }
+        }
+    }
     return catArray.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *category = self.categories[indexPath.section];
+    if ([category[@"type"] isEqualToString:@"expandable"]) {
+        if ([self.isExpanded[category[@"name"]] isEqualToValue:@NO]) {
+            self.isExpanded[category[@"name"]] = @YES;
+        } else {
+            self.isExpanded[category[@"name"]] = @NO;
+        }
+        NSLog(@"%@", self.isExpanded);
+    }
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -99,8 +123,11 @@ typedef enum FilterCategoryListTypes FilterCategoryListTypes;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *category = self.categories[indexPath.section];
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    
+    if ([category[@"type"] isEqualToString:@"expandable"]) {
+        cell.textLabel.text = category[@"list"][indexPath.row];
+    }
     return cell;
 }
 
