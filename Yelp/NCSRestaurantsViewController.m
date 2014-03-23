@@ -54,25 +54,22 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setNeedsStatusBarAppearanceUpdate];
-    // Do any additional setup after loading the view from its nib.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.restaurants = [[NSMutableArray alloc] init];
     
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.000];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.76 green:0.07 blue:0.0 alpha:1.0];
-
-    if([self.options length] != 0){
-        [self fetchQuery:self.options];
-        self.options = @"";
-    } else {
-        [self fetchQuery:@"Thai"];
-    }
-    
-    
+    // add the filters button
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Filters" style:UIBarButtonItemStylePlain target:self action:@selector(onFilters:)];
     self.navigationItem.leftBarButtonItem = filterButton;
+    
+    // styles
+    [self setNeedsStatusBarAppearanceUpdate];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.000];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.76 green:0.07 blue:0.0 alpha:1.0];
+    
+    
+    // grab a default query
+    [self fetchQuery:@"Thai"];
 }
 
 - (void)fetchQuery:(NSString *)query {
@@ -115,7 +112,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    // show restaurant view (optional)
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -149,11 +146,6 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 - (void)handleSearch:(UISearchBar *)searchBar {
     [self fetchQuery:searchBar.text];
     [self.tableView reloadData];
-    [searchBar resignFirstResponder]; // for hiding the keyboard
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
-    NSLog(@"User cancelled search");
     [searchBar resignFirstResponder]; // for hiding the keyboard
 }
 

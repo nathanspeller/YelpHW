@@ -10,5 +10,4 @@
 #import "NCSFiltersViewController.h"
 
 @interface NCSRestaurantsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, NCSFiltersViewControllerDelegate>
-    @property (nonatomic, strong) NSString *options;
 @end

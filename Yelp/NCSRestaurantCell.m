@@ -23,7 +23,7 @@
 @implementation NCSRestaurantCell
 
 + (CGFloat)heightForRestaurant:(NCSRestaurant *)restaurant{
-    //get attributes of name UILabel
+    // TODO should get attributes of name UILabel prototype rather than hardcoded
     CGFloat nameWidth = 215;
     NSString *nameFont = @".HelveticaNeueInterface-MediumP4";
     CGFloat nameFontSize = 17;
@@ -31,8 +31,7 @@
     CGSize constrainedSize = CGSizeMake( nameWidth, 9999);
     
     NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                          [UIFont fontWithName:nameFont size:nameFontSize], NSFontAttributeName,
-                                          nil];
+                                         [UIFont fontWithName:nameFont size:nameFontSize], NSFontAttributeName, nil];
     
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:restaurant.name attributes:attributesDictionary];
     

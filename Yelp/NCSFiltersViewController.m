@@ -8,6 +8,14 @@
 
 #import "NCSFiltersViewController.h"
 
+enum FilterCategoryListTypes {
+    kTypeSegmented,
+    kTypeSwitches,
+    kTypeExpandable
+};
+
+typedef enum FilterCategoryListTypes FilterCategoryListTypes;
+
 @interface NCSFiltersViewController ()
 @property (nonatomic, strong) NSMutableArray *categories;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -83,6 +91,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
