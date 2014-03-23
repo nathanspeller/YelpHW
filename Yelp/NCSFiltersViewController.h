@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NCSFiltersViewController : UIViewController
+@class NCSFiltersViewController;
+@protocol NCSFiltersViewControllerDelegate <NSObject>
+- (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSString *)options;
+@end
 
+@interface NCSFiltersViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, weak) id <NCSFiltersViewControllerDelegate> delegate;
 @end

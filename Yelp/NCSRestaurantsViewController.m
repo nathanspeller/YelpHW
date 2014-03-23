@@ -56,7 +56,6 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     [super viewDidLoad];
     [self setNeedsStatusBarAppearanceUpdate];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Yelp";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.restaurants = [[NSMutableArray alloc] init];
@@ -64,8 +63,13 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.000];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.76 green:0.07 blue:0.0 alpha:1.0];
 
+    if([self.options length] != 0){
+        [self fetchQuery:self.options];
+        self.options = @"";
+    } else {
+        [self fetchQuery:@"Thai"];
+    }
     
-    [self fetchQuery:@"Thai"];
     
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Filters" style:UIBarButtonItemStylePlain target:self action:@selector(onFilters:)];
     self.navigationItem.leftBarButtonItem = filterButton;
@@ -89,6 +93,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 
 - (IBAction)onFilters:(id)sender{
     NCSFiltersViewController *vc = [[NCSFiltersViewController alloc] init];
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -150,6 +155,14 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
     NSLog(@"User cancelled search");
     [searchBar resignFirstResponder]; // for hiding the keyboard
+}
+
+#pragma mark - Filter methods
+
+- (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSString *)options
+{
+    [self fetchQuery:options];
+    [self.tableView reloadData];
 }
 
 @end
