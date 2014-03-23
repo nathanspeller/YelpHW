@@ -10,9 +10,10 @@
 
 @class NCSFiltersViewController;
 @protocol NCSFiltersViewControllerDelegate <NSObject>
-- (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSDictionary *)options;
+- (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSMutableDictionary *)options;
 @end
 
 @interface NCSFiltersViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) id <NCSFiltersViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSMutableDictionary *options;
 @end

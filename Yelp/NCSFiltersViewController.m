@@ -12,7 +12,6 @@
 @property (nonatomic, strong) NSMutableArray *categories;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableDictionary *isExpanded;
-@property (nonatomic, strong) NSMutableDictionary *options;
 @end
 
 @implementation NCSFiltersViewController
@@ -33,7 +32,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.isExpanded = [[NSMutableDictionary alloc] initWithCapacity:4];
-    self.options = [[NSMutableDictionary alloc] init];
     
     self.categories = [NSMutableArray arrayWithObjects:
       @{
@@ -120,12 +118,13 @@
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     cell.textLabel.text = category[@"list"][indexPath.row];
     if ([category[@"type"] isEqualToString:@"dropdown"]) {
-        if ((indexPath.row == 0) && ([[self.isExpanded objectForKey:category[@"name"]]  isEqual: @YES]) && ([self.options objectForKey:category[@"name"]])) {
+        if ((indexPath.row == 0) && ([self.tableView numberOfRowsInSection:indexPath.section] == 1) && ([self.options objectForKey:category[@"name"]])) {
             cell.textLabel.text = [self.options objectForKey:category[@"name"]];
         }
     } else if ([category[@"type"] isEqualToString:@"switches"]) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
+        [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         cell.accessoryView = switchView;
     } else if ([category[@"type"] isEqualToString:@"expandable"]){
         if([self.options[category[@"list"][indexPath.row]]  isEqual: @YES]){
@@ -135,8 +134,7 @@
     return cell;
 }
 
-- (IBAction)togglePrice:(id)sender{
-    
+- (IBAction)switchChanged:(id)sender{
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

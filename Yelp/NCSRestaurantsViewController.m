@@ -22,7 +22,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 @property (nonatomic, strong) NCSYelpClient *client;
 @property (nonatomic, strong) NSMutableArray *restaurants;
 @property (nonatomic, strong) NSString *query;
-@property (nonatomic, strong) NSDictionary *options;
+@property (nonatomic, strong) NSMutableDictionary *options;
 @end
 
 @implementation NCSRestaurantsViewController
@@ -33,6 +33,8 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     if (self) {
         self.client = [[NCSYelpClient alloc] initWithConsumerKey:kYelpConsumerKey consumerSecret:kYelpConsumerSecret accessToken:kYelpToken accessSecret:kYelpTokenSecret];
     }
+    
+    self.options = [[NSMutableDictionary alloc] init];
     
     // add search bar
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
@@ -88,6 +90,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 - (IBAction)onFilters:(id)sender{
     NCSFiltersViewController *vc = [[NCSFiltersViewController alloc] init];
     vc.delegate = self;
+    vc.options = self.options;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -151,7 +154,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 
 #pragma mark - Filter methods
 
-- (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSDictionary *)options
+- (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSMutableDictionary *)options
 {
     self.options = options;
     [self fetchQuery];
