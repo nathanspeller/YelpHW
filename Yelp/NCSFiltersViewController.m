@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray *categories;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableDictionary *isExpanded;
+@property (nonatomic, strong) NSMutableDictionary *options;
 @end
 
 @implementation NCSFiltersViewController
@@ -40,6 +41,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.isExpanded = [[NSMutableDictionary alloc] initWithCapacity:4];
+    self.options = [[NSMutableDictionary alloc] init];
     
     self.categories = [NSMutableArray arrayWithObjects:
       @{
@@ -69,9 +71,6 @@
         },
        nil
        ];
-    [self.tableView reloadData];
-    
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,6 +97,8 @@
                 return 1;
             }
         }
+    } else if ([category[@"type"] isEqualToString:@"segmented"]) {
+        return 1;
     }
     return catArray.count;
 }
@@ -108,14 +109,15 @@
     if ([category[@"type"] isEqualToString:@"expandable"]) {
         if ([self.isExpanded[category[@"name"]] isEqualToValue:@NO]) {
             self.isExpanded[category[@"name"]] = @YES;
+            self.options[category[@"name"]] = category[@"list"][indexPath.row];
         } else {
             self.isExpanded[category[@"name"]] = @NO;
         }
         NSLog(@"%@", self.isExpanded);
+        NSLog(@"%@", self.options);
     }
     
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -126,7 +128,11 @@
     NSDictionary *category = self.categories[indexPath.section];
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     if ([category[@"type"] isEqualToString:@"expandable"]) {
-        cell.textLabel.text = category[@"list"][indexPath.row];
+        if ((indexPath.row == 0) && ([[self.isExpanded objectForKey:category[@"name"]]  isEqual: @YES]) && ([self.options objectForKey:category[@"name"]])) {
+            cell.textLabel.text = [self.options objectForKey:category[@"name"]];
+        } else {
+            cell.textLabel.text = category[@"list"][indexPath.row];
+        }
     }
     return cell;
 }
