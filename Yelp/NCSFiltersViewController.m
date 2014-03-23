@@ -8,14 +8,6 @@
 
 #import "NCSFiltersViewController.h"
 
-//enum FilterCategoryListTypes {
-//    kTypeSegmented,
-//    kTypeSwitches,
-//    kTypeExpandable
-//};
-//
-//typedef enum FilterCategoryListTypes FilterCategoryListTypes;
-
 @interface NCSFiltersViewController ()
 @property (nonatomic, strong) NSMutableArray *categories;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -68,9 +60,7 @@
         @"name":@"General Features",
         @"type":@"expandable",
         @"list":@[@"Take-out",@"Good for Groups",@"Has TV",@"Accepts Credit Cards",@"Wheelchair Accessible",@"Full Bar",@"Beer & Wine only",@"Happy Hour",@"Free Wi-Fi",@"Paid Wi-fi"]
-        },
-       nil
-       ];
+        }, nil ];
 }
 
 - (void)didReceiveMemoryWarning
@@ -138,11 +128,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self.delegate addFiltersViewController:self didFinishWithOptions:@"bacon"];
+    [self.delegate addFiltersViewController:self didFinishWithOptions:self.options];
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-////    return [NCSRestaurantCell heightForRestaurant:[self.restaurants objectAtIndex:indexPath.row]];
-//}
 
 @end

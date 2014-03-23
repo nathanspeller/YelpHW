@@ -10,7 +10,7 @@
 
 @class NCSFiltersViewController;
 @protocol NCSFiltersViewControllerDelegate <NSObject>
-- (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSString *)options;
+- (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSDictionary *)options;
 @end
 
 @interface NCSFiltersViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>

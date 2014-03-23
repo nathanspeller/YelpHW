@@ -21,6 +21,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NCSYelpClient *client;
 @property (nonatomic, strong) NSMutableArray *restaurants;
+@property (nonatomic, strong) NSString *query;
 @end
 
 @implementation NCSRestaurantsViewController
@@ -30,14 +31,9 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.client = [[NCSYelpClient alloc] initWithConsumerKey:kYelpConsumerKey consumerSecret:kYelpConsumerSecret accessToken:kYelpToken accessSecret:kYelpTokenSecret];
-        
-        [self.client searchWithTerm:@"Thai" success:^(AFHTTPRequestOperation *operation, id response) {
-            NSLog(@"response: %@", response);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"error: %@", [error description]);
-        }];
     }
     
+    // add search bar
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
     searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     UIView *searchBarView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 310.0, 44.0)];
@@ -57,6 +53,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.restaurants = [[NSMutableArray alloc] init];
+    self.query = self.query ? self.query : @"Thai";
     
     // add the filters button
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Filters" style:UIBarButtonItemStylePlain target:self action:@selector(onFilters:)];
@@ -67,14 +64,13 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.000];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.76 green:0.07 blue:0.0 alpha:1.0];
     
-    
-    // grab a default query
-    [self fetchQuery:@"Thai"];
+    [self fetchQuery];
 }
 
-- (void)fetchQuery:(NSString *)query {
-    [self.client searchWithTerm:query success:^(AFHTTPRequestOperation *operation, id response) {
+- (void)fetchQuery {
+    [self.client searchWithTerm:self.query success:^(AFHTTPRequestOperation *operation, id response) {
         NSDictionary *dataDictionary = (NSDictionary *)response;
+        NSLog(@"%@", response);
         NSArray *businessesArray = [dataDictionary objectForKey:@"businesses"];
         [self.restaurants removeAllObjects];
         for (NSDictionary *mDictionary in businessesArray) {
@@ -146,16 +142,17 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 }
 
 - (void)handleSearch:(UISearchBar *)searchBar {
-    [self fetchQuery:searchBar.text];
+    self.query = searchBar.text;
+    [self fetchQuery];
     [self.tableView reloadData];
     [searchBar resignFirstResponder]; // for hiding the keyboard
 }
 
 #pragma mark - Filter methods
 
-- (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSString *)options
+- (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSDictionary *)options
 {
-    [self fetchQuery:options];
+    [self fetchQuery];
     [self.tableView reloadData];
 }
 
