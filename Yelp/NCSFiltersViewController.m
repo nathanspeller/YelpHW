@@ -47,12 +47,12 @@
       @{
         @"name":@"Sort By",
         @"type":@"dropdown",
-        @"list":@[@"Best Match",@"Distance",@"Rating",@"Most Reviewed"]
+        @"list":@[@"Best Match",@"Distance",@"Rating"]
         },
       @{
-        @"name":@"General Features",
+        @"name":@"Categories",
         @"type":@"expandable",
-        @"list":@[@"Take-out",@"Good for Groups",@"Has TV",@"Accepts Credit Cards",@"Wheelchair Accessible",@"Full Bar",@"Beer & Wine only",@"Happy Hour",@"Free Wi-Fi",@"Paid Wi-fi"]
+        @"list":@[@"Barbeque", @"Brazilian", @"Brunch", @"British", @"Burgers", @"Cafes", @"Cambodian", @"Chinese", @"Chicken Wings"]
         }, nil ];
 }
 
