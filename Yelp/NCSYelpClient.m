@@ -36,15 +36,6 @@
     if (options[@"Offering a Deal"]) {
         parameters[@"deals_filter"] = @(YES);
     }
-    if (options[@"Open Now"]) {
-//        parameters[@"deals_filter"] = @(YES);
-    }
-    if (options[@"Hot & New"]) {
-//        parameters[@"deals_filter"] = @(YES);
-    }
-    if (options[@"Delivery"]) {
-//        parameters[@"deals_filter"] = @(YES);
-    }
     
     
     if (options[@"Sort By"]){

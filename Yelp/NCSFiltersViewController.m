@@ -37,7 +37,7 @@
       @{
         @"name":@"Most Popular",
         @"type":@"switches",
-        @"list":@[@"Open Now",@"Hot & New",@"Offering a Deal",@"Delivery"]
+        @"list":@[@"Offering a Deal"]
         },
       @{
         @"name":@"Distance",
