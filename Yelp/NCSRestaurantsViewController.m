@@ -161,6 +161,9 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 
 - (void)addFiltersViewController:(NCSFiltersViewController *)controller didFinishWithOptions:(NSMutableDictionary *)options
 {
+    
+    // here I would need to setup the Yelp client to take in this set of options
+    // before making the new filtered request
     self.options = options;
     [self fetchQuery];
     NSLog(@"Searching '%@' with options %@",self.query, options);

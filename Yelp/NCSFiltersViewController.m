@@ -103,8 +103,6 @@
         } else {
             self.isExpanded[category[@"name"]] = @NO;
         }
-        NSLog(@"%@", self.isExpanded);
-        NSLog(@"%@", self.options);
     } else if ([category[@"type"] isEqualToString:@"expandable"]) {
         if(![self.isExpanded[category[@"name"]] isEqualToValue: @YES] && indexPath.row == 3){
             self.isExpanded[category[@"name"]] = @YES;
