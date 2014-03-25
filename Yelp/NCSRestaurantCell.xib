@@ -16,9 +16,7 @@
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="215" translatesAutoresizingMaskIntoConstraints="NO" id="NwX-ZM-85X">
                         <rect key="frame" x="93" y="10" width="215" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="215" id="6uR-ho-G0g"/>
-                        </constraints>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -55,7 +53,6 @@
                         <rect key="frame" x="93" y="75" width="206" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="206" id="3Su-Ib-g1c"/>
                             <constraint firstAttribute="height" constant="21" id="keq-jn-Ouu"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -66,7 +63,6 @@
                         <rect key="frame" x="93" y="56" width="206" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="206" id="HNU-gQ-AEb"/>
                             <constraint firstAttribute="height" constant="21" id="W2T-Ay-Vcj"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -75,6 +71,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="vFW-kk-r4U" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="2iN-dT-nP9"/>
+                    <constraint firstAttribute="trailing" secondItem="aqL-3b-bll" secondAttribute="trailing" constant="21" id="2kt-IP-A6y"/>
                     <constraint firstItem="aqL-3b-bll" firstAttribute="top" secondItem="Zx3-wF-5SK" secondAttribute="bottom" constant="19" id="4ps-rs-nIU"/>
                     <constraint firstItem="Zx3-wF-5SK" firstAttribute="top" secondItem="NwX-ZM-85X" secondAttribute="bottom" constant="4" id="B2v-TW-dmG"/>
                     <constraint firstItem="Lbu-vj-0sR" firstAttribute="leading" secondItem="vFW-kk-r4U" secondAttribute="trailing" constant="8" id="Beg-3p-2Sv"/>
@@ -86,6 +83,8 @@
                     <constraint firstItem="zql-1X-v0f" firstAttribute="leading" secondItem="vFW-kk-r4U" secondAttribute="trailing" constant="8" id="a3X-Nq-8zQ"/>
                     <constraint firstItem="Lbu-vj-0sR" firstAttribute="top" secondItem="Zx3-wF-5SK" secondAttribute="bottom" id="fli-yO-zPe"/>
                     <constraint firstItem="NwX-ZM-85X" firstAttribute="leading" secondItem="vFW-kk-r4U" secondAttribute="trailing" constant="8" id="mjJ-K8-41y"/>
+                    <constraint firstAttribute="trailing" secondItem="Lbu-vj-0sR" secondAttribute="trailing" constant="21" id="moU-vb-SWZ"/>
+                    <constraint firstAttribute="trailing" secondItem="NwX-ZM-85X" secondAttribute="trailing" constant="12" id="p4B-KB-CNh"/>
                     <constraint firstItem="vFW-kk-r4U" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="pet-Ps-8sG"/>
                     <constraint firstItem="NwX-ZM-85X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="syZ-Hr-lgc"/>
                 </constraints>

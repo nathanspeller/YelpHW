@@ -10,8 +10,9 @@
 #import "NCSRestaurant.h"
 
 @interface NCSRestaurantCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *name;
 
 - (void)setRestaurant:(NCSRestaurant *)restaurant;
 
-+ (CGFloat)heightForRestaurant:(NCSRestaurant *)restaurant;
++ (CGFloat)heightForRestaurant:(NCSRestaurant *)restaurant cell:(NCSRestaurantCell *)prototype;
 @end

@@ -14,7 +14,6 @@
 @property (nonatomic, strong) NCSRestaurant *restaurant;
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UIImageView *rating;
-@property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *reviews;
 @property (weak, nonatomic) IBOutlet UILabel *address;
 @property (weak, nonatomic) IBOutlet UILabel *categories;
@@ -22,16 +21,21 @@
 
 @implementation NCSRestaurantCell
 
-+ (CGFloat)heightForRestaurant:(NCSRestaurant *)restaurant{
++ (CGFloat)heightForRestaurant:(NCSRestaurant *)restaurant cell:(NCSRestaurantCell *)prototype{
     // TODO should get attributes of name UILabel prototype rather than hardcoded
-    CGFloat nameWidth = 215;
-    NSString *nameFont = @".HelveticaNeueInterface-MediumP4";
-    CGFloat nameFontSize = 17;
+    CGFloat nameWidth = prototype.name.frame.size.width;
+    UIFont *font = prototype.name.font;
+    
+//    // NEED TO SOMEHOW ROTATE THE PROTOTYPE
+//    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+//    if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight){
+//        nameWidth = 340;
+//    }
     
     CGSize constrainedSize = CGSizeMake( nameWidth, 9999);
     
     NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         [UIFont fontWithName:nameFont size:nameFontSize], NSFontAttributeName, nil];
+                                         font, NSFontAttributeName, nil];
     
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:restaurant.name attributes:attributesDictionary];
     

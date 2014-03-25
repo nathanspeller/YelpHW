@@ -136,6 +136,10 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
         [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+        [switchView setTag:indexPath.row];
+        if(self.options[category[@"list"][indexPath.row]]){
+            switchView.on = YES;
+        }
         cell.accessoryView = switchView;
     } else if ([category[@"type"] isEqualToString:@"expandable"]){
         if (![self.isExpanded[category[@"name"]] isEqualToValue:@YES] && indexPath.row == 3) {
@@ -148,6 +152,13 @@
 }
 
 - (IBAction)switchChanged:(id)sender{
+    NSDictionary *category = self.categories[0];
+    if(self.options[category[@"list"][[sender tag]]]){
+        [self.options removeObjectForKey:category[@"list"][[sender tag]]];
+    } else {
+        self.options[category[@"list"][[sender tag]]] = @YES;
+    }
+                     
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

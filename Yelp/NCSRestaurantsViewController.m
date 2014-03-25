@@ -23,6 +23,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 @property (nonatomic, strong) NSMutableArray *restaurants;
 @property (nonatomic, strong) NSString *query;
 @property (nonatomic, strong) NSMutableDictionary *options;
+@property (nonatomic, strong) NCSRestaurantCell *prototype;
 @end
 
 @implementation NCSRestaurantsViewController
@@ -35,6 +36,10 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     }
     
     self.options = [[NSMutableDictionary alloc] init];
+    
+    //create prototype
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"NCSRestaurantCell" owner:self options:nil];
+    self.prototype = [nib objectAtIndex:0];
     
     // add search bar
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
@@ -132,7 +137,7 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [NCSRestaurantCell heightForRestaurant:[self.restaurants objectAtIndex:indexPath.row]];
+    return [NCSRestaurantCell heightForRestaurant:[self.restaurants objectAtIndex:indexPath.row] cell:self.prototype];
 }
 
 #pragma mark - Search methods
@@ -159,6 +164,14 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
     self.options = options;
     [self fetchQuery];
     NSLog(@"Searching '%@' with options %@",self.query, options);
+    [self.tableView reloadData];
+}
+
+#pragma mark - Rotation
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    self.prototype = nil;
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"NCSRestaurantCell" owner:self options:nil];
+    self.prototype = [nib objectAtIndex:0];
     [self.tableView reloadData];
 }
 
